@@ -73,34 +73,30 @@ public class FPSMeter : MonoBehaviour {
 
     InitHistory();
 
-    // if (m_drawFrameId != Time.frameCount) {
-    //  m_drawFrameId = Time.frameCount;
-
-      float instantFps = 1.0f / m_deltaTime;
-      float averageFps = 1.0f / (m_totalTime / m_durationByFrame.Length);
-      GUI.BeginGroup(m_groupRect);
-        GUI.Box(m_groupRect, string.Format("FPS: {0:0} - {1:0}", averageFps, instantFps), m_style);
-        GUI.BeginGroup(m_fpsRect);
-          GUI.DrawTexture(m_60FpsRect, m_gray);
-          GUI.DrawTexture(m_30FpsRect, m_gray);
-          GUI.DrawTexture(m_0FpsRect, m_gray);
-          for (int i = 0; i < m_durationByFrame.Length; ++i)
-          { 
-            /*
-            55 56 58 59  0
-            57 58 59  0  1
-            58 59  0  1  2 
-            59  0  1  2  3
-            */
-            int ndx = (Time.frameCount + m_durationByFrame.Length + i - 1) % m_durationByFrame.Length;
-            float dt = m_durationByFrame[ndx];
-            int fps = (int)(1.0f / dt);
-            GUI.DrawTexture(new Rect(i, 0, 1, m_processingTimeByFrame[ndx] * 60), m_blue);
-            GUI.DrawTexture(new Rect(i, fps, 1, 2), fps < 50 ? m_red : m_green);
-          }
-        GUI.EndGroup();
+    float instantFps = 1.0f / m_deltaTime;
+    float averageFps = 1.0f / (m_totalTime / m_durationByFrame.Length);
+    GUI.BeginGroup(m_groupRect);
+      GUI.Box(m_groupRect, string.Format("FPS: {0:0} - {1:0}", averageFps, instantFps), m_style);
+      GUI.BeginGroup(m_fpsRect);
+        GUI.DrawTexture(m_60FpsRect, m_gray);
+        GUI.DrawTexture(m_30FpsRect, m_gray);
+        GUI.DrawTexture(m_0FpsRect, m_gray);
+        for (int i = 0; i < m_durationByFrame.Length; ++i)
+        { 
+          /*
+          55 56 58 59  0
+          57 58 59  0  1
+          58 59  0  1  2 
+          59  0  1  2  3
+          */
+          int ndx = (Time.frameCount + m_durationByFrame.Length + i - 1) % m_durationByFrame.Length;
+          float dt = m_durationByFrame[ndx];
+          int fps = (int)(1.0f / dt);
+          GUI.DrawTexture(new Rect(i, 0, 1, m_processingTimeByFrame[ndx] * 60), m_blue);
+          GUI.DrawTexture(new Rect(i, fps, 1, 2), fps < 50 ? m_red : m_green);
+        }
       GUI.EndGroup();
-    // }
+    GUI.EndGroup();
 
     {
       int ndx = Time.frameCount % m_durationByFrame.Length;
@@ -115,7 +111,6 @@ public class FPSMeter : MonoBehaviour {
   Texture m_red;
   Texture m_blue;
   Texture m_gray;
-  int m_drawFrameId = 0;
   float m_totalTime = 0.0f;
   uint m_numHistory = 100;
   float[] m_durationByFrame;
