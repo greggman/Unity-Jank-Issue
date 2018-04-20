@@ -2,7 +2,7 @@
 
 This is a small project to show an jank issue I'm seeing in Unity.
 
-I'm running on a 2.6ghz March 2018 Mac Mini
+To repo, get a Mac, plug it into a TV via HDMI. Run this app on the HDMI TV
 
 To run export the project to an app then from the command line run it like this
 
@@ -45,3 +45,6 @@ pretty consistent 60fps.
 
 **HOW DO FIX THIS JANK ISSUE?**
 
+Using a standard monitor like the monitor built into a Mac laptop or an iMac does not repo the issue. Unfortunately we're trying to use Unity and Macs for kiosk, events, and installations and it looks horrible when things studder.
+
+Here's hoping Unity will find the time to look into this issue.
